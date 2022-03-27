@@ -1,5 +1,5 @@
 .main {
 	background: url('/img/theming-gradient.svg') no-repeat #000;
 	background-size: cover;
-	height: 100vh;
+	min-height: 100vh;
 }

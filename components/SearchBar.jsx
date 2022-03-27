@@ -1,7 +1,11 @@
 import styles from '../styles/components/Searchbar.module.css';
-import { Input, Grid } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchValue }) => {
+	const handleChange = e => {
+		setSearchValue(e.target.value);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.search}>
@@ -12,6 +16,7 @@ const SearchBar = () => {
 					size='xl'
 					className={styles.inputSearch}
 					css={{ color: 'white' }}
+					onChange={handleChange}
 				/>
 			</div>
 		</div>
