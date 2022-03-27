@@ -11,6 +11,16 @@ const Game = ({ game }) => {
 		Switch: styles.switch,
 	};
 
+	let imageSrc;
+	if (game.cover) {
+		imageSrc = `http://${game.cover.url.slice(2)}`.replace(
+			't_thumb',
+			't_logo_med'
+		);
+	} else {
+		imageSrc = '/img/games/001.jpg';
+	}
+
 	const RatingComponent = () => {
 		return (
 			<div className={styles.ratingValue}>
@@ -27,23 +37,26 @@ const Game = ({ game }) => {
 			<div className={styles.game}>
 				<div className={styles.left}>
 					<Image
-						src={game.gameCover}
+						src={imageSrc}
 						width={100}
 						height={135}
 						className={styles.gameCover}
 					/>
 				</div>
 				<div className={styles.right}>
-					<div className={styles.title}>{game.gameTitle}</div>
+					<div className={styles.title}>{game.name}</div>
 					<div className={styles.platformList}>
-						{game.platform.map(platform => (
-							<div
-								key={platform}
-								className={`${styles.platform} ${platformCSS[platform]} `}
-							>
-								{platform}
-							</div>
-						))}
+						{game.platforms &&
+							game.platforms.map(platform => (
+								<div
+									key={platform}
+									className={`${styles.platform} ${
+										platformCSS[platform.abbreviation]
+									} `}
+								>
+									{platform.abbreviation}
+								</div>
+							))}
 					</div>
 					<div className={styles.rating}>
 						<StarIcon fontSize='small' className={styles.star} />

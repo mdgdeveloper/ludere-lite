@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css';
 import ThemeSelect from '../components/ThemeSelect';
 import GameGrid from '../components/GameGrid';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Data Import
 import { data } from '../data/demoData';
@@ -13,12 +14,17 @@ import { data } from '../data/demoData';
 export default function Home() {
 	const [searchValue, setSearchValue] = useState();
 	const [dataResult, setDataResult] = useState();
+	const [loading, setLoading] = useState(false);
 
-	useEffect(() => {
-		if (!searchValue) {
+	useEffect(async () => {
+		if (!searchValue || searchValue.length < 4) {
 			setDataResult(null);
 		} else {
-			setDataResult(data.filter(game => game.gameTitle.includes(searchValue)));
+			setLoading(true);
+			const result = await axios.post('/api/search', { search: searchValue });
+			setDataResult(result.data);
+			setLoading(false);
+			// setDataResult(result);
 		}
 	}, [searchValue]);
 
@@ -33,7 +39,7 @@ export default function Home() {
 			<main className={styles.main}>
 				<Title />
 				<SearchBar setSearchValue={setSearchValue} />
-				<GameGrid data={dataResult} />
+				<GameGrid data={dataResult} loading={loading} />
 			</main>
 		</div>
 	);
