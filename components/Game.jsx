@@ -58,10 +58,14 @@ const Game = ({ game }) => {
 								</div>
 							))}
 					</div>
-					<div className={styles.rating}>
-						<StarIcon fontSize='small' className={styles.star} />
-						<div className={styles.ratingValue}>{game.rating}</div>
-					</div>
+					{game.rating ? (
+						<div className={styles.rating}>
+							<StarIcon fontSize='small' className={styles.star} />
+							<div className={styles.ratingValue}>{game.rating.toFixed(2)}</div>
+						</div>
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</div>

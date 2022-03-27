@@ -9,7 +9,7 @@ const GameGrid = ({ data, loading }) => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.gameGrid}>GameGrid</div>
+			<div className={styles.gameGrid}></div>
 			{!loading ? (
 				<Grid.Container gap={3} justify='center'>
 					{data ? (
@@ -19,7 +19,7 @@ const GameGrid = ({ data, loading }) => {
 							</Grid>
 						))
 					) : (
-						<div>No results</div>
+						<div>Type for search</div>
 					)}
 				</Grid.Container>
 			) : (
